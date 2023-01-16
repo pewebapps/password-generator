@@ -88,9 +88,32 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+getPasswordLength = () => {
+  const passwordLength = prompt("How many characters would you like your password to have? It must be between at least 10 characters and no more then 64.");
+  const number = parseFloat(passwordLength);
+  return number;
+}
+
 // Function to prompt user for password options
 function getPasswordOptions() {
-
+      // ask for password length
+      const passwordLength = getPasswordLength();
+      console.log(passwordLength, " ", typeof passwordLength);
+      if (isNaN(passwordLength)) {
+        alert(
+          "please enter a number. Refresh to start again"
+        )
+        return;
+      }
+  
+      // ask for character types
+  
+          // Lowercase
+  
+          // Uppercase
+  
+          // Numeric
+  
 }
 
 // Function for getting a random element from an array
