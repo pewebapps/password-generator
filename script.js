@@ -98,13 +98,19 @@ getPasswordLength = () => {
 function getPasswordOptions() {
       // ask for password length
       const passwordLength = getPasswordLength();
-      console.log(passwordLength, " ", typeof passwordLength);
       if (isNaN(passwordLength)) {
         alert(
-          "please enter a number. Refresh to start again"
+          "please enter a valid number."
         )
         return;
       }
+
+      if (passwordLength < 10 || passwordLength > 64) {
+        alert(
+          "The password length must be between 10 and 64."
+        )
+      }
+
   
       // ask for character types
   
@@ -123,7 +129,7 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-
+  getPasswordOptions();
 }
 
 // Get references to the #generate element
