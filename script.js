@@ -1,3 +1,6 @@
+const PASSWORD_MIN_LENGTH = 10;
+const PASSWORD_MAX_LENGTH = 64;
+
 // Array of special characters to be included in password
 var specialCharacters = [
   '@',
@@ -89,26 +92,34 @@ var upperCasedCharacters = [
 ];
 
 getPasswordLength = () => {
-  const passwordLength = prompt("How many characters would you like your password to have? It must be between at least 10 characters and no more then 64.");
-  const number = parseFloat(passwordLength);
-  return number;
+  const passwordLengthInput = prompt(`How many characters would you like your password to have? It must be between at least ${PASSWORD_MIN_LENGTH} characters and no more then ${PASSWORD_MAX_LENGTH}.`);
+  
+  // check input is a number
+  const passwordLength = parseFloat(passwordLengthInput);
+  if (isNaN(passwordLength)) {
+    alert(
+      "please enter a valid number."
+    )
+    return;
+  }
+
+  // ensure number entered is within limits
+  if (passwordLength < PASSWORD_MIN_LENGTH || passwordLength > PASSWORD_MAX_LENGTH) {
+    alert(
+      `The password length must be between 10 and 64. ${passwordLength} is not valid`
+    )
+    return;
+  }
+
+  return passwordLength;
 }
 
 // Function to prompt user for password options
 function getPasswordOptions() {
       // ask for password length
       const passwordLength = getPasswordLength();
-      if (isNaN(passwordLength)) {
-        alert(
-          "please enter a valid number."
-        )
-        return;
-      }
-
-      if (passwordLength < 10 || passwordLength > 64) {
-        alert(
-          "The password length must be between 10 and 64."
-        )
+      if (typeof(passwordLength) !== "number") {
+        return "Invalid requirements";
       }
 
   
