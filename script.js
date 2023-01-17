@@ -122,15 +122,17 @@ function getPasswordOptions() {
         return "Invalid requirements";
       }
 
-  
-      // ask for character types
-  
-          // Lowercase
-  
-          // Uppercase
-  
-          // Numeric
-  
+      // Lowercase
+      const hasLowercase = confirm("Would you like lowercase characters?");
+
+      // Uppercase
+      const hasUppercase = confirm("Would you like uppercase characters?");
+
+      // Numeric
+      const hasNumeric = confirm("Would you like numeric characters?");
+
+      // Special Characters
+      const hasSpecialCharacters = confirm("Would you like special characters?");
 }
 
 // Function for getting a random element from an array
