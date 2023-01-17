@@ -94,23 +94,8 @@ var upperCasedCharacters = [
 getPasswordLength = () => {
   const passwordLengthInput = prompt(`How many characters would you like your password to have? It must be between at least ${PASSWORD_MIN_LENGTH} characters and no more then ${PASSWORD_MAX_LENGTH}.`);
   
-  // check input is a number
+  // convert input to a number
   const passwordLength = parseFloat(passwordLengthInput);
-  if (isNaN(passwordLength)) {
-    alert(
-      "please enter a valid number."
-    )
-    return;
-  }
-
-  // ensure number entered is within limits
-  if (passwordLength < PASSWORD_MIN_LENGTH || passwordLength > PASSWORD_MAX_LENGTH) {
-    alert(
-      `The password length must be between 10 and 64. ${passwordLength} is not valid`
-    )
-    return;
-  }
-
   return passwordLength;
 }
 
@@ -118,9 +103,6 @@ getPasswordLength = () => {
 function getPasswordOptions() {
       // ask for password length
       const passwordLength = getPasswordLength();
-      if (typeof(passwordLength) !== "number") {
-        return "Invalid requirements";
-      }
 
       // Lowercase
       const hasLowercase = confirm("Would you like lowercase characters?");
@@ -133,6 +115,25 @@ function getPasswordOptions() {
 
       // Special Characters
       const hasSpecialCharacters = confirm("Would you like special characters?");
+
+      // Pass back password options
+      const passwordOptions = {
+        passwordLength: passwordLength,
+        hasLowercase: hasLowercase,
+        hasUppercase: hasUppercase,
+        hasNumeric: hasNumeric,
+        hasSpecialCharacters,
+        isPasswordLengthANumber: function() {
+          return isNaN(this.passwordLength);
+        },
+        isPasswordLengthWithinLimits: function() {
+          return (this.passwordLength >= PASSWORD_MIN_LENGTH && this.passwordLength <= PASSWORD_MAX_LENGTH);
+        },
+        hasValidCharacterTypes: function() {
+          return (this.hasLowercase || this.hasUppercase || this.hasNumeric || this.hasSpecialCharacters);
+        }
+      }
+      return passwordOptions;
 }
 
 // Function for getting a random element from an array
@@ -142,7 +143,8 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-  getPasswordOptions();
+  const passwordOptions = getPasswordOptions();
+  console.log(passwordOptions);
 }
 
 // Get references to the #generate element
