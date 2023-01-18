@@ -154,7 +154,23 @@ function generatePassword() {
   }
   
   // get available characters
-  
+  let availableCharacters = [];
+  if (passwordOptions.hasLowercase) {
+    availableCharacters = lowerCasedCharacters;
+  }
+  if (passwordOptions.hasUppercase) {
+    const tempArray = availableCharacters.concat(upperCasedCharacters);
+    availableCharacters = tempArray;
+  }
+  if (passwordOptions.hasNumeric) {
+    const tempArray = availableCharacters.concat(numericCharacters);
+    availableCharacters = tempArray;
+  }
+  if (passwordOptions.hasSpecialCharacters) {
+    const tempArray = availableCharacters.concat(specialCharacters);
+    availableCharacters = tempArray;
+  }
+
   // loop to generate password
     // pass password back
 }
