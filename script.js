@@ -131,6 +131,9 @@ function getPasswordOptions() {
         },
         hasValidCharacterTypes: function() {
           return (this.hasLowercase || this.hasUppercase || this.hasNumeric || this.hasSpecialCharacters);
+        },
+        isValid: function() {
+          return (this.isPasswordLengthANumber() && this.isPasswordLengthWithinLimits() && this.hasValidCharacterTypes());
         }
       }
       return passwordOptions;
@@ -144,7 +147,16 @@ function getRandom(arr) {
 // Function to generate password with user input
 function generatePassword() {
   const passwordOptions = getPasswordOptions();
-  console.log(passwordOptions);
+
+  // check password options are valid
+  if (!passwordOptions.isValid()) {
+    return "Invalid password entry";
+  }
+  
+  // get available characters
+  
+  // loop to generate password
+    // pass password back
 }
 
 // Get references to the #generate element
