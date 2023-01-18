@@ -96,6 +96,7 @@ getPasswordLength = () => {
   
   // convert input to a number
   const passwordLength = parseFloat(passwordLengthInput);
+  console.log(typeof passwordLength);
   return passwordLength;
 }
 
@@ -124,7 +125,7 @@ function getPasswordOptions() {
         hasNumeric: hasNumeric,
         hasSpecialCharacters,
         isPasswordLengthANumber: function() {
-          return isNaN(this.passwordLength);
+          return !isNaN(this.passwordLength);
         },
         isPasswordLengthWithinLimits: function() {
           return (this.passwordLength >= PASSWORD_MIN_LENGTH && this.passwordLength <= PASSWORD_MAX_LENGTH);
@@ -141,7 +142,8 @@ function getPasswordOptions() {
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+  const randomNumber = Math.floor(Math.random() * arr.length);
+  return arr[randomNumber];
 }
 
 // Function to generate password with user input
@@ -172,7 +174,12 @@ function generatePassword() {
   }
 
   // loop to generate password
-    // pass password back
+  let password = "";
+  for (let i = 0; i < passwordOptions.passwordLength; i++) {
+    const newCharacter = getRandom(availableCharacters);
+    password += newCharacter;
+  }
+  return password;
 }
 
 // Get references to the #generate element
